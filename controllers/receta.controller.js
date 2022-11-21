@@ -1,6 +1,6 @@
 import receta from "../models/receta.model.js";
 import { uploadImage } from "../utils/cloudinary.js";
-import fs from "fs";
+import fs from "fs-extra";
 
 
 export const getRecetas = async (req, res) => {
@@ -38,7 +38,8 @@ export const createReceta = async (req, res) => {
                 public_id: result.public_id,
                 secure_url: result.secure_url
             }
-            console.log(result)
+            
+            await fs.unlink(req.files.img.tempFilePath);
         }
 
         await recetaToPost.save();
