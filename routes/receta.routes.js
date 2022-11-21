@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { multerConfig } from "../utils/multer.js";
 
 // controllers
 import { getRecetas,
@@ -9,15 +8,14 @@ import { getRecetas,
          deleteReceta } from "../controllers/receta.controller.js";
 
 const router = Router();
-const upload = multerConfig();
 
 router.get("/recetas/", getRecetas);
 
 router.get("/recetas/:id", getReceta);
 
-router.post("/recetas/", upload.single('img'), createReceta);
+router.post("/recetas/", createReceta);
 
-router.put("/recetas/:id", upload.single('img'), updateReceta);
+router.put("/recetas/:id", updateReceta);
 
 router.delete("/recetas/:id", deleteReceta);
 
