@@ -2,14 +2,25 @@ import { Router } from "express";
 import { multerConfig } from "../utils/multer.js";
 
 // controllers
-import { getRecetas, createReceta  } from "../controllers/receta.controller.js";
+import { getRecetas,
+         getReceta, 
+         createReceta,
+         updateReceta, 
+         deleteReceta } from "../controllers/receta.controller.js";
 
 const router = Router();
 const upload = multerConfig();
 
-router.get("/", getRecetas);
+router.get("/recetas/", getRecetas);
 
-router.post("/receta/", upload.single('img'), createReceta);
+router.get("/recetas/:id", getReceta);
+
+router.post("/recetas/", upload.single('img'), createReceta);
+
+router.put("/recetas/:id", upload.single('img'), updateReceta);
+
+router.delete("/recetas/:id", deleteReceta);
+
 
 
 export default router;
