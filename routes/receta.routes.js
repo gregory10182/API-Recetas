@@ -9,15 +9,15 @@ import { getRecetas,
 
 const router = Router();
 
-router.get("/recetas/", getRecetas);
+router.get("/receta/", getRecetas);
 
-router.get("/recetas/:id", getReceta);
+router.get("/receta/:id", getReceta);
 
-router.post("/recetas/", createReceta);
+router.post("/receta/", createReceta);
 
-router.put("/recetas/:id", updateReceta);
+router.put("/receta/:id", updateReceta);
 
-router.delete("/recetas/:id", deleteReceta);
+router.delete("/receta/:id", deleteReceta);
 
 
 
