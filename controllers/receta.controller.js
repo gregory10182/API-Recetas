@@ -1,5 +1,6 @@
 import receta from "../models/receta.model.js";
 import { uploadImage } from "../utils/cloudinary.js";
+import fs from "fs";
 
 
 export const getRecetas = async (req, res) => {
