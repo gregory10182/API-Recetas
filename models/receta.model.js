@@ -5,7 +5,7 @@ const recetaSchema = mongoose.Schema({
     ingredientes: { type: Object, required: true },
     cantidades: { type: Object, required: true },
     pasos: { type: Object, required: true },
-    img: {data: Buffer, contentType: String}
+    img: {public_id : String, secure_url: String}
 })
 
 

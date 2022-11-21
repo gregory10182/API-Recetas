@@ -1,4 +1,5 @@
 import receta from "../models/receta.model.js";
+import { uploadImage } from "../utils/cloudinary.js";
 
 
 export const getRecetas = async (req, res) => {
@@ -21,8 +22,30 @@ export const getReceta = async (req, res) => {
 }
 
 export const createReceta = async (req, res) => {
-    console.log(req.body);
-    return res.status(201).json(req.body);
+    try{
+        const { Nombre_receta, ingredientes, cantidades, pasos } = req.body;
+        const recetaToPost = new receta({
+            Nombre_receta,
+            ingredientes,
+            cantidades,
+            pasos 
+        });
+        if (req.files?.img) {
+            const result = await uploadImage(req.files.img.tempFilePath)
+            
+            recetaToPost.img = {
+                public_id: result.public_id,
+                secure_url: result.secure_url
+            }
+            console.log(result)
+        }
+
+        await recetaToPost.save();
+
+        res.status(201).json(recetaToPost);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 }
 
 export const updateReceta = async (req, res) => {
