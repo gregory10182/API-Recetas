@@ -53,6 +53,17 @@ export const createReceta = async (req, res) => {
 export const updateReceta = async (req, res) => {
     const { id } = req.params;
     try {
+        
+        if (req.files?.img) {
+            const result = await uploadImage(req.files.img.tempFilePath)
+            
+            req.body.img = {
+                public_id: result.public_id,
+                secure_url: result.secure_url
+            }
+            
+            await fs.unlink(req.files.img.tempFilePath);
+        }
         const receta_updated = await receta.findByIdAndUpdate(id, req.body)
         res.status(200).json(receta_updated);
     } catch (error) {
