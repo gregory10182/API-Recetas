@@ -11,9 +11,9 @@ const router = Router();
 
 router.get("/receta/", getRecetas);
 
-router.get("/receta/:id", getReceta);
-
 router.post("/receta/", createReceta);
+
+router.get("/receta/:id", getReceta);
 
 router.put("/receta/:id", updateReceta);
 

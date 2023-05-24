@@ -24,16 +24,17 @@ export const getReceta = async (req, res) => {
 
 export const createReceta = async (req, res) => {
     try{
-        const { Nombre_receta, ingredientes, cantidades, pasos } = req.body;
+        console.log('hola')
+        const { Nombre_receta, CantidadTotal, ingredientes, pasos } = req.body;
+        console.log(req.body)
         const recetaToPost = new receta({
             Nombre_receta,
+            CantidadTotal,
             ingredientes,
-            cantidades,
             pasos 
         });
         if (req.files?.img) {
             const result = await uploadImage(req.files.img.tempFilePath)
-            
             recetaToPost.img = {
                 public_id: result.public_id,
                 secure_url: result.secure_url
@@ -41,6 +42,9 @@ export const createReceta = async (req, res) => {
             
             await fs.unlink(req.files.img.tempFilePath);
         }
+
+        console.log(recetaToPost)
+
 
         await recetaToPost.save();
 
